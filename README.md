@@ -1,4 +1,5 @@
 # ZPAD_LABS
-Pinchuk Katya
-FB-45
-Data preparation and analysis tools
+
+Student: Pinchuk Katya  
+Group: FB-45  
+Course: Data preparation and analysis tools
