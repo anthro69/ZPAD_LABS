@@ -205,3 +205,15 @@ cython_debug/
 marimo/_static/
 marimo/_lsp/
 __marimo__/
+# System files
+.DS_Store
+
+# IDE
+.idea/
+.vscode/
+*.swp
+
+# Extra generated data files
+*.txt
+*.csv
+*.json
