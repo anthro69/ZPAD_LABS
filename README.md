@@ -1,5 +1,46 @@
-# ZPAD_LABS
+# Лабораторна робота №2
 
-Student: Pinchuk Katya  
-Group: FB-45  
-Course: Data preparation and analysis tools
+**Студент:** Pinchuk Katya  
+**Група:** FB-45  
+**Курс:** Засоби підготовки та аналізу даних
+
+## Опис
+
+Лабораторна робота з підготовки та аналізу даних. Складається з двох частин.
+
+## Вимоги до системи
+
+- Python 3.10+
+- pip
+
+## Встановлення залежностей
+
+Створити віртуальне середовище:
+
+```
+python -m venv venv
+```
+
+Активувати віртуальне середовище:
+
+- Windows:
+```
+venv\Scripts\activate
+```
+
+- Linux/Mac:
+```
+source venv/bin/activate
+```
+
+Встановити залежності:
+
+```
+pip install -r requirements.txt
+```
+
+## Запуск
+
+```
+jupyter notebook
+```
