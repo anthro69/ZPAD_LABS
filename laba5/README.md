@@ -43,7 +43,8 @@
 
 3. Запустіть веб-додаток за допомогою Streamlit:
    ```bash
-   streamlit run laba5.py
+    pip install pandas plotly
+    streamlit run laba5.py
    ```
 
 4. При першому запуску додаток автоматично завантажить дані VHI з NOAA (~1-2 хвилини). Після цього браузер відкриється за адресою `http://localhost:8501`.
