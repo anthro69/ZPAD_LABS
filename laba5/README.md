@@ -8,8 +8,7 @@
 
 ## Демонстрація роботи програми
 
-<!-- Додай сюди скріншот головного вікна додатку, як у прикладі вище -->
-<!-- <img width="2620" height="1210" alt="screenshot" src="https://github.com/user-attachments/assets/XXXXXXXX" /> -->
+<img width="2483" height="888" alt="image" src="https://github.com/user-attachments/assets/7114aaaf-c2ef-4921-8160-06e08485fcd3" />
 
 ---
 
@@ -44,7 +43,7 @@
 
 3. Запустіть веб-додаток за допомогою Streamlit:
    ```bash
-   streamlit run app.py
+   streamlit run laba5.py
    ```
 
 4. При першому запуску додаток автоматично завантажить дані VHI з NOAA (~1-2 хвилини). Після цього браузер відкриється за адресою `http://localhost:8501`.
@@ -53,11 +52,9 @@
 
 ```text
 laba5/
-├── app.py
+├── laba5.py
 ├── requirements.txt
 ├── .gitignore
-├── .streamlit/
-│   └── config.toml
 └── README.md
 ```
 
