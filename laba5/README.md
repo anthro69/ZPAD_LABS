@@ -29,6 +29,19 @@
 <img width="2501" height="1023" alt="image" src="https://github.com/user-attachments/assets/1c7abc49-2d55-4006-9aa6-63ec31e25f1d" />
 
 ---
+## Вимоги до системи
+Версія Python: 3.10 або вище
+---
+Інструкція із запуску
+---
+## Створіть віртуальне середовище:
+```bash
+python -m venv venv
+```
+## Активуйте віртуальне середовище:
+
+Windows: venv\Scripts\activate
+Linux / macOS: source venv/bin/activate
 
 ## Як запустити
 
