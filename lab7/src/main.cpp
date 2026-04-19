@@ -8,7 +8,7 @@
 #include "Display.hpp"
 #include "FaceDetector.hpp"
 
-// ── Globals for callbacks ─────────────────────────────────────────────────────
+
 static FrameProcessor* g_fp = nullptr;
 static int g_brightness = 100;
 
@@ -24,7 +24,7 @@ void onBrightness(int value, void* /*userdata*/) {
     if (g_fp) g_fp->setBrightness(value);
 }
 
-// ── main ──────────────────────────────────────────────────────────────────────
+
 int main(int argc, char* argv[]) {
     int camIndex = 0;
     if (argc > 1) camIndex = std::stoi(argv[1]);
@@ -36,7 +36,6 @@ int main(int argc, char* argv[]) {
 
     g_fp = &frameProc;
 
-    // Load face detector (worker thread starts inside constructor)
     FaceDetector faceDetector("deploy.prototxt",
                                "res10_300x300_ssd_iter_140000.caffemodel");
 
@@ -62,14 +61,12 @@ int main(int argc, char* argv[]) {
 
         Mode mode = keyProc.getMode();
 
-        // Send frame to background detector when in FACE mode
         if (mode == Mode::FACE && faceDetector.isLoaded()) {
             faceDetector.pushFrame(frame);
         }
 
         cv::Mat processed = frameProc.process(frame, mode);
 
-        // Overlay face rectangles (drawn on top of processed frame)
         if (mode == Mode::FACE && faceDetector.isLoaded()) {
             auto faces = faceDetector.getFaces();
             frameProc.overlayFaces(processed, faces);
@@ -81,7 +78,6 @@ int main(int argc, char* argv[]) {
         int key = cv::waitKey(1);
         keyProc.processKey(key);
 
-        // FPS calculation
         ++frameCount;
         auto now = std::chrono::steady_clock::now();
         double elapsed = std::chrono::duration<double>(now - tStart).count();
