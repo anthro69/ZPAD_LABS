@@ -92,6 +92,41 @@ cd ..
 Відображення кадру у вікні (`cv::imshow`), зберігає назву вікна для trackbar та mouse callback.
 
 ---
+## Вимоги до системи
+
+- OS: Linux (Ubuntu 20.04+ / Kali / Debian)
+- CMake >= 3.10
+- GCC >= 9 (підтримка C++17)
+- OpenCV >= 4.0 (з модулем `dnn`)
+- libv4l2 (для роботи з камерою)
+- Підключена веб-камера
+
+---
+
+## Структура проєкту
+
+```
+lab7/
+├── include/
+│   ├── CameraProvider.hpp
+│   ├── Display.hpp
+│   ├── FaceDetector.hpp
+│   ├── FrameProcessor.hpp
+│   └── KeyProcessor.hpp
+├── src/
+│   ├── CameraProvider.cpp
+│   ├── Display.cpp
+│   ├── FaceDetector.cpp
+│   ├── FrameProcessor.cpp
+│   ├── KeyProcessor.cpp
+│   └── main.cpp
+├── build/                  # генерується при збірці
+├── deploy.prototxt         # архітектура нейромережі
+├── res10_300x300_ssd_iter_140000.caffemodel  # ваги нейромережі
+├── CMakeLists.txt
+├── preinstall.sh
+└── README.md
+```
 
 ## Модель
 
