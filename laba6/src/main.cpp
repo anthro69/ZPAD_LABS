@@ -7,7 +7,7 @@
 #include "FrameProcessor.hpp"
 #include "Display.hpp"
 
-// ── Globals for callbacks ─────────────────────────────────────────────────────
+
 static FrameProcessor* g_fp = nullptr;
 static int g_brightness = 100;
 
@@ -20,12 +20,12 @@ void onMouse(int event, int /*x*/, int /*y*/, int flags, void* /*userdata*/) {
     }
 }
 
-// Trackbar callback — brightness
+
 void onBrightness(int value, void* /*userdata*/) {
     if (g_fp) g_fp->setBrightness(value);
 }
 
-// ── main ──────────────────────────────────────────────────────────────────────
+
 int main(int argc, char* argv[]) {
     int camIndex = 0;
     if (argc > 1) camIndex = std::stoi(argv[1]);
@@ -37,7 +37,7 @@ int main(int argc, char* argv[]) {
 
     g_fp = &frameProc;
 
-    // Register callbacks
+  
     cv::setMouseCallback(display.windowName(), onMouse, nullptr);
     cv::createTrackbar("Brightness", display.windowName(),
                        &g_brightness, 200, onBrightness);
@@ -61,7 +61,7 @@ int main(int argc, char* argv[]) {
         int key = cv::waitKey(1);
         keyProc.processKey(key);
 
-        // FPS calculation
+       
         ++frameCount;
         auto now = std::chrono::steady_clock::now();
         double elapsed = std::chrono::duration<double>(now - tStart).count();
