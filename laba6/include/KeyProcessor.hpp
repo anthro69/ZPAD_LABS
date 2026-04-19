@@ -13,7 +13,6 @@ class KeyProcessor {
 public:
     KeyProcessor();
 
-    // Process key from cv::waitKey; returns false if quit requested
     bool processKey(int key);
 
     Mode getMode() const;
