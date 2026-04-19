@@ -16,10 +16,9 @@ public:
     FaceDetector(const std::string& prototxt, const std::string& caffemodel);
     ~FaceDetector();
 
-    // Main thread calls this — sends a copy of the frame to worker
+ 
     void pushFrame(const cv::Mat& frame);
 
-    // Main thread calls this — gets last known face rects
     std::vector<FaceRect> getFaces();
 
     bool isLoaded() const { return loaded_; }
