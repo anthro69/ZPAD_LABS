@@ -39,7 +39,7 @@ void FaceDetector::workerLoop() {
         {
             std::lock_guard<std::mutex> lock(mutex_);
             if (!hasNewFrame_) {
-                // nothing to process yet
+              
             } else {
                 frame = inputFrame_.clone();
                 hasNewFrame_ = false;
@@ -51,8 +51,7 @@ void FaceDetector::workerLoop() {
             continue;
         }
 
-        // Artificial load to demonstrate async benefit (as suggested in lab)
-        // std::this_thread::sleep_for(std::chrono::milliseconds(500));
+       
 
         int h = frame.rows, w = frame.cols;
         cv::Mat blob = cv::dnn::blobFromImage(frame, 1.0, cv::Size(300, 300),
@@ -60,8 +59,7 @@ void FaceDetector::workerLoop() {
         net_.setInput(blob);
         cv::Mat detections = net_.forward();
 
-        // detections shape: [1, 1, N, 7]
-        // each row: [batchId, classId, confidence, x1, y1, x2, y2]
+       
         cv::Mat det = detections.reshape(1, detections.total() / 7);
 
         std::vector<FaceRect> found;
@@ -74,7 +72,6 @@ void FaceDetector::workerLoop() {
             int x2 = static_cast<int>(det.at<float>(i, 5) * w);
             int y2 = static_cast<int>(det.at<float>(i, 6) * h);
 
-            // Clamp to frame
             x1 = std::max(0, x1); y1 = std::max(0, y1);
             x2 = std::min(w - 1, x2); y2 = std::min(h - 1, y2);
 
