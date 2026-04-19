@@ -3,7 +3,7 @@
 #include <iostream>
 
 CameraProvider::CameraProvider(int cameraIndex) {
-    // Use libv4l2 backend — handles format conversion transparently
+  
     cap_.open(cameraIndex, cv::CAP_V4L);
     if (!cap_.isOpened()) {
         throw std::runtime_error("Cannot open camera with index " + std::to_string(cameraIndex));
@@ -13,7 +13,7 @@ CameraProvider::CameraProvider(int cameraIndex) {
     cap_.set(cv::CAP_PROP_FRAME_HEIGHT, 480);
     cap_.set(cv::CAP_PROP_FPS, 30);
 
-    // Drain init frames
+
     cv::Mat dummy;
     for (int i = 0; i < 5; ++i) cap_ >> dummy;
 
