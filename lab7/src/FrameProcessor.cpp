@@ -55,7 +55,7 @@ cv::Mat FrameProcessor::process(const cv::Mat& frame, Mode mode) {
 
     switch (mode) {
         case Mode::NORMAL:
-        case Mode::FACE:   // FACE mode shows normal video; faces drawn separately
+        case Mode::FACE:  
             result = bright;
             break;
 
