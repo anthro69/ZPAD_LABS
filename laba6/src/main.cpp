@@ -1,0 +1,76 @@
+#include <opencv2/opencv.hpp>
+#include <iostream>
+#include <chrono>
+
+#include "CameraProvider.hpp"
+#include "KeyProcessor.hpp"
+#include "FrameProcessor.hpp"
+#include "Display.hpp"
+
+
+static FrameProcessor* g_fp = nullptr;
+static int g_brightness = 100;
+
+// Mouse callback — scroll wheel changes zoom
+void onMouse(int event, int /*x*/, int /*y*/, int flags, void* /*userdata*/) {
+    if (!g_fp) return;
+    if (event == cv::EVENT_MOUSEWHEEL) {
+        double delta = (cv::getMouseWheelDelta(flags) > 0) ? 0.1 : -0.1;
+        g_fp->setZoom(g_fp->getZoom() + delta);
+    }
+}
+
+
+void onBrightness(int value, void* /*userdata*/) {
+    if (g_fp) g_fp->setBrightness(value);
+}
+
+
+int main(int argc, char* argv[]) {
+    int camIndex = 0;
+    if (argc > 1) camIndex = std::stoi(argv[1]);
+
+    CameraProvider camera(camIndex);
+    KeyProcessor   keyProc;
+    FrameProcessor frameProc;
+    Display        display("Camera Viewer");
+
+    g_fp = &frameProc;
+
+  
+    cv::setMouseCallback(display.windowName(), onMouse, nullptr);
+    cv::createTrackbar("Brightness", display.windowName(),
+                       &g_brightness, 200, onBrightness);
+    cv::setTrackbarPos("Brightness", display.windowName(), 100);
+
+    int frameCount = 0;
+    double fps = 0.0;
+    auto tStart = std::chrono::steady_clock::now();
+
+    while (!keyProc.shouldQuit()) {
+        cv::Mat frame = camera.getFrame();
+        if (frame.empty()) {
+            std::cerr << "Empty frame received\n";
+            break;
+        }
+
+        cv::Mat processed = frameProc.process(frame, keyProc.getMode());
+        frameProc.overlayStats(processed, fps, frameCount);
+        display.show(processed);
+
+        int key = cv::waitKey(1);
+        keyProc.processKey(key);
+
+       
+        ++frameCount;
+        auto now = std::chrono::steady_clock::now();
+        double elapsed = std::chrono::duration<double>(now - tStart).count();
+        if (elapsed >= 1.0) {
+            fps = frameCount / elapsed;
+            frameCount = 0;
+            tStart = now;
+        }
+    }
+
+    return 0;
+}
